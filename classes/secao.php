@@ -4,24 +4,21 @@
  * Atributo
  * secao: nome do arquivo onde vai estar implementada uma das seções do website
  */
-class Secao{
+class Secao {
     private $secao;
 
-    public function _construct($secao){
-        $this->secao = isset($_GET["secao"])? $_GET["secao"]: "home";
+    public function __construct($secao) {
+        $this->secao = $secao;
     }
 
-    public function carregar(){
+    public function carregar() {
         $arquivo = "secoes/{$this->secao}.php";
 
-        if(file_exists($arquivo)){
+        if (file_exists($arquivo)) {
             require $arquivo;
-        }
-        else{
+        } else {
             echo "<div class='bg-warning text-white m-3 p-3'>";
-
-            echo "A seçao $arquivo não existe!!";
-
+            echo "A seção $arquivo não existe!!";
             echo "</div>";
         }
     }

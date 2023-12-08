@@ -1,13 +1,9 @@
 <?php
 class Rodape{
 
-/** Classe que implementa o rodape do contrainer da página
- * 
- * Atributos:
- * $ano: ano de implemento
- * $autor: pessoa ou empresa que implementou a aplicação
- * $email: email de contato 
- */
+ private $ano;
+ private $autor;
+ private $email;
 
 public function __construct($ano = ANO, $autor = AUTOR, $email = EMAIL){
     $this->ano = $ano;

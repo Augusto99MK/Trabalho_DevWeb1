@@ -1,50 +1,47 @@
 <?php
 
-class Layout{
-
+class Layout {
     private $cabecalho;
     private $container;
     private $title;
     private $estilos;
     private $scripts;
 
-    public function __construct($title = TITULO, $estilos = ESTILOS, $scripts = SCRIPTS){
+    public function __construct($title = TITULO, $estilos = ESTILOS, $scripts = SCRIPTS) {
         $this->title = $title;
         $this->estilos = $estilos;
         $this->scripts = $scripts;
-
         $this->cabecalho = new Cabecalho();
         $this->container = new Container();
     }
 
-    public function gerarHtml(){
-        ?>
-        <!DOCTYPE html>
-        <html lang="pt-br">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title><?php echo $this->title; ?></title>
+    public function gerarHtml() {
+        // Gera a marcação HTML da página
+        echo '<!DOCTYPE html>';
+        echo '<html lang="pt-br">';
+        echo '<head>';
+        echo '<meta charset="UTF-8">';
+        echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+        echo "<title>{$this->title}</title>";
 
-            <?php foreach($this->estilos as $estilo): ?>
-            <link rel="stylesheet" href="css/<?php echo $estilo; ?>.css">
-            <?php endforeach; ?>
+        // Adiciona os estilos dinamicamente
+        foreach ($this->estilos as $estilo) {
+            echo "<link rel='stylesheet' href='css/{$estilo}'>";
+        }
 
-            <?php foreach($this->scripts as $script): ?>
-            <script src="js/<?php echo $script; ?>.js"></script>
-            <?php endforeach; ?>
-        </head>
-        <body>
-            <?php echo $this->cabecalho->gerarHtml(); ?>
+        // Adiciona os scripts dinamicamente
+        foreach ($this->scripts as $script) {
+            echo "<script src='js/{$script}'></script>";
+        }
 
-            <div class="container">
-                <?php echo $this->container->gerarHtml(); ?>
-            </div>
+        echo '</head>';
+        echo '<body>';
+        
+        // Chama o método gerarHtml do cabeçalho e do contêiner
+        $this->cabecalho->gerarHtml();
+        $this->container->gerarHtml();
 
-            <?php echo $this->rodape->gerarHtml(); ?>
-        </body>
-        </html>
-        <?php
+        echo '</body>';
+        echo '</html>';
     }
 }
-
